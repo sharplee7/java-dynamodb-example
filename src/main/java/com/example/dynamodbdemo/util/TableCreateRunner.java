@@ -6,7 +6,8 @@ import com.amazonaws.services.dynamodbv2.model.CreateTableRequest;
 import com.amazonaws.services.dynamodbv2.model.DeleteTableRequest;
 import com.amazonaws.services.dynamodbv2.model.ProvisionedThroughput;
 import com.amazonaws.services.dynamodbv2.util.TableUtils;
-import com.example.dynamodbdemo.domain.Customer;
+import com.example.dynamodbdemo.customer.domain.Customer;
+import com.example.dynamodbdemo.music.domain.MusicCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -27,21 +28,32 @@ public class TableCreateRunner implements CommandLineRunner {
     void createTable() {
         dynamoDBMapper = new DynamoDBMapper(amazonDynamoDB);
 
-        CreateTableRequest tableRequest = dynamoDBMapper
+        CreateTableRequest customerTableRequest = dynamoDBMapper
                 .generateCreateTableRequest(Customer.class);
-        tableRequest.setProvisionedThroughput(
+        customerTableRequest.setProvisionedThroughput(
                 new ProvisionedThroughput(1L, 1L));
-        TableUtils.createTableIfNotExists(amazonDynamoDB, tableRequest);
+
+        CreateTableRequest musicCollectionTableRequest = dynamoDBMapper
+                .generateCreateTableRequest(MusicCollection.class);
+        musicCollectionTableRequest.setProvisionedThroughput(
+                new ProvisionedThroughput(1L, 1L));
+
+        TableUtils.createTableIfNotExists(amazonDynamoDB, customerTableRequest);
+        TableUtils.createTableIfNotExists(amazonDynamoDB, musicCollectionTableRequest);
     }
 
     void deleteTable() {
-        DeleteTableRequest deleteTableRequest = dynamoDBMapper.generateDeleteTableRequest(Customer.class);
-        TableUtils.deleteTableIfExists(amazonDynamoDB, deleteTableRequest);
+        DeleteTableRequest customerTableRequest = dynamoDBMapper.generateDeleteTableRequest(Customer.class);
+        TableUtils.deleteTableIfExists(amazonDynamoDB, customerTableRequest);
+
+        DeleteTableRequest musicCollectionTable = dynamoDBMapper.generateDeleteTableRequest(MusicCollection.class);
+        TableUtils.deleteTableIfExists(amazonDynamoDB, musicCollectionTable);
     }
 
     @Override
     public void run(String... args) throws Exception {
         try {
+//            deleteTable();
             createTable();
         } catch (Exception e) {
             e.printStackTrace();

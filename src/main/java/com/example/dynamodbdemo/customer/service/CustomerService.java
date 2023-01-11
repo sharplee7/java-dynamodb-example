@@ -1,7 +1,7 @@
-package com.example.dynamodbdemo.service;
+package com.example.dynamodbdemo.customer.service;
 
-import com.example.dynamodbdemo.domain.Customer;
-import com.example.dynamodbdemo.repository.CustomerRepository;
+import com.example.dynamodbdemo.customer.domain.Customer;
+import com.example.dynamodbdemo.customer.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +18,7 @@ public class CustomerService {
         return customerRepository.getCustomerById(customerId);
     }
 
-    public String deleteCustomerById(@PathVariable("id") String customerId) {
+    public String deleteCustomerById(String customerId) {
         return  customerRepository.deleteCustomerById(customerId);
     }
 

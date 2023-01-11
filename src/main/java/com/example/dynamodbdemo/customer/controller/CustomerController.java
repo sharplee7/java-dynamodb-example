@@ -1,7 +1,7 @@
-package com.example.dynamodbdemo.controller;
+package com.example.dynamodbdemo.customer.controller;
 
-import com.example.dynamodbdemo.domain.Customer;
-import com.example.dynamodbdemo.service.CustomerService;
+import com.example.dynamodbdemo.customer.domain.Customer;
+import com.example.dynamodbdemo.customer.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +26,7 @@ public class CustomerController {
         return  customerService.deleteCustomerById(customerId);
     }
 
-    @PutMapping("/customer/{id}")
+    @PutMapping("/customer")
     public String updateCustomer(@RequestBody Customer customer) {
         return customerService.updateCustomer(customer);
     }

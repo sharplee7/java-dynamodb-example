@@ -1,4 +1,4 @@
-package com.example.dynamodbdemo.domain;
+package com.example.dynamodbdemo.customer.domain;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
