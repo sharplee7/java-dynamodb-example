@@ -53,7 +53,7 @@ public class TableCreateRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         try {
-//            deleteTable();
+            deleteTable();
             createTable();
         } catch (Exception e) {
             e.printStackTrace();
