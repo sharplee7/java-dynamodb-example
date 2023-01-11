@@ -7,3 +7,5 @@
     https://sharplee7.tistory.com/154
 * JDK 11
 * gradle
+* 테스트 URL
+  * http://localhost:8080/swagger-ui/
